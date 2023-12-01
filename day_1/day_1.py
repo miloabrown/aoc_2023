@@ -57,7 +57,6 @@ def part2():
             string = string.replace(key, key[0]+item+key[-1])
         return string
 
-    print(text_to_digit("one"))
     d = [just_digits(text_to_digit(row)) for row in data]
     return sum([int(row[0]+row[-1]) for row in d])
 
