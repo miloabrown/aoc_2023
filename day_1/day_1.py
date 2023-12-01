@@ -3,7 +3,6 @@ Advent Of Code 2023
 Code written by Milo
 """
 
-
 # Deal with input.
 with open("day_1/input.txt", "r") as file:
     data = [line.strip() for line in file.readlines()]
@@ -42,26 +41,23 @@ def part2():
         to convert a string to a digit in string format.
         """
         text_digits = {
-            "one": "1",
-            "two": "2",
-            "three": "3",
-            "four": "4",
-            "five": "5",
-            "six": "6",
-            "seven":"7",
-            "eight": "8",
-            "nine": "9",
+            "one": "o1e",
+            "two": "t2o",
+            "three": "t3e",
+            "four": "f4r",
+            "five": "f5e",
+            "six": "s6x",
+            "seven":"s7n",
+            "eight": "e8t",
+            "nine": "n9e",
         }
 
         for key,item in text_digits.items():
-            string = string.replace(key, key[0]+item+key[-1])
+            string = string.replace(key,item)
         return string
 
     d = [just_digits(text_to_digit(row)) for row in data]
     return sum([int(row[0]+row[-1]) for row in d])
-
-
-
 
 
 def main():

@@ -1,8 +1,10 @@
 #!/bin/bash
 
-# Script to download input for given day and year from /
-# Advent Of Code
-""" USE: ./download_input.sh <day> <year> """
+"""
+Script to download input for given day and year from /
+Advent Of Code
+Usage: ./download_input.sh <day> <year>
+"""
 
 # File where session token is stored
 ENV_FILE=.env
@@ -20,6 +22,7 @@ OUTPUT_FILE="${OUTPUT_DIR}/input.txt"
 
 mkdir -p "${OUTPUT_DIR}"
 touch "${OUTPUT_DIR}/day_${DAY}.py"
+cp template.py "${OUTPUT_DIR}/day_${DAY}.py"
 
 # Curl command
 curl -k --ssl-no-revoke --cookie "session=${SESSION_TOKEN}" https://adventofcode.com/${YEAR}/day/${DAY}/input -o ${OUTPUT_FILE}
