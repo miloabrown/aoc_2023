@@ -1,6 +1,7 @@
 """
 Advent Of Code 2023
 Code written by Milo
+Day1
 """
 
 # Deal with input.
