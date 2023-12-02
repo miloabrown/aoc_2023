@@ -3,19 +3,15 @@ Advent Of Code 2023
 Code written by Milo
 Day2
 """
-
 import re
 
 # Deal with input.
-with open("day_2/test_input.txt", "r") as file:
+with open("day_2/input.txt", "r") as file:
     data = [
         (list(map(lambda x: tuple(x.split(" ")),
         (", ".join(re.split(': |; ',row)[1:]).split(", ")))))
         for row in file.read().split("\n")[:-1]
         ]
-
-print(data)
-
 
 def part1():
     """
@@ -36,8 +32,6 @@ def part1():
 
     return sum(filtered_rows)
 
-
-
 def part2():
     """
     PART2
@@ -47,7 +41,12 @@ def part2():
     Answer for part2:
     """
 
-
+    row_powers = []
+    for row in data:
+        row_powers.append(max([int(x[0]) for x in row if x[1] == "red"])\
+                        * max([int(x[0]) for x in row if x[1] == "green"])\
+                        * max([int(x[0]) for x in row if x[1] == "blue"]))
+    return sum(row_powers)
 
 
 def main():
