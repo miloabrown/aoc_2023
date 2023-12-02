@@ -9,9 +9,11 @@ import re
 with open("day_2/input.txt", "r") as file:
     data = [
         (list(map(lambda x: tuple(x.split(" ")),
-        (", ".join(re.split(': |; ',row)[1:]).split(", ")))))
+        ((re.split(': |; |, ',row)[1:])))))
         for row in file.read().split("\n")[:-1]
         ]
+
+    print(data)
 
 def part1():
     """
