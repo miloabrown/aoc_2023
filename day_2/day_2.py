@@ -17,6 +17,7 @@ def part1():
     """
     PART1
     Which games are possible with 12 red, 13 green and 14 blue cubes?
+    Return the sum of the id's of the rows that are possible.
 
     Answer for part1: 2727
     """
@@ -36,9 +37,10 @@ def part2():
     """
     PART2
     Find the minimum amount of cubes to make each game possible,
-    multiply the number of cubes for each row and sum all the rows.
+    multiply the number of min cubes for the "power" of each row.
+    Return the sum of the "powers" of each row.
 
-    Answer for part2:
+    Answer for part2: 56580
     """
 
     row_powers = []
@@ -47,7 +49,6 @@ def part2():
                         * max([int(x[0]) for x in row if x[1] == "green"])\
                         * max([int(x[0]) for x in row if x[1] == "blue"]))
     return sum(row_powers)
-
 
 def main():
     print(f"Part1: {part1()}\nPart2: {part2()}")
