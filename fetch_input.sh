@@ -1,9 +1,12 @@
 #!/bin/bash
 
 """
-Script to download input for given day and year from /
-Advent Of Code
-Usage: ./download_input.sh <day> <year>
+Script to fetch the input for a
+given day and year from Advent Of Code.
+Creates a directory for the day and
+copies a template file to it.
+
+Usage: ./fetch_input.sh <day> <year>
 """
 
 # File where session token is stored
