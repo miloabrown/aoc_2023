@@ -42,7 +42,7 @@ def part2():
     Each winning card wins copies of the next cards,
     according to the number of matches.
 
-    Answer for part2:
+    Answer for part2: 9997537
     """
 
     cards_won = defaultdict(int)
