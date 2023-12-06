@@ -3,12 +3,14 @@ Advent Of Code 2023
 Code written by Milo
 Day6: Wait For It
 """
-
 import numpy as np  # For product function.
 
 # Deal with input.
-with open("day_6/test_input.txt", "r") as file:
-    times, distances = [row.split()[1:] for row in file.readlines()]
+with open("day_6/input.txt", "r") as file:
+    data = [row.split()[1:] for row in file.readlines()]
+
+def count_possible_wins(time, distance):
+    return len([x for x in range(time) if (time - x) * x > distance])
 
 def part1():
     """
@@ -16,11 +18,9 @@ def part1():
 
     Answer for part1: 3317888
     """
-    def possible_wins(time,distance):
-        return len([x for x in range(int(time)) if (int(time)-int(x)) * int(x) > int(distance)])
 
-    return np.prod([possible_wins(x,y) for x,y in zip(times,distances)])
-
+    times,distances = [list(map(int,row)) for row in [*data]]
+    return np.prod([count_possible_wins(x, y) for x, y in zip(times, distances)])
 
 def part2():
     """
@@ -28,15 +28,27 @@ def part2():
 
     Answer for part2: 24655068
     """
-    time,distance = int("".join(times)),int("".join(distances))
 
-    def possible_wins():
-        mini = next(x for x in range(int(time)) if (int(time)-int(x)) * int(x) > int(distance))
-        maxi = next(x for x in range(int(time),-1,-1) if (int(time)-int(x)) * int(x) > int(distance))
+    time, distance = [int("".join(row)) for row in data]
 
-        return maxi-mini+1
+    def binary_search(is_left):
+        left = 0
+        right = time
+        while left < right:
+            mid = (left + right) // 2
+            if (time - mid) * mid > distance:
+                if is_left:
+                    right = mid
+                else:
+                    left = mid + 1
+            else:
+                if is_left:
+                    left = mid + 1
+                else:
+                    right = mid
+        return left
 
-    return possible_wins()
+    return binary_search(False) - binary_search(True)
 
 def main():
     print(f"Part1: {part1()}\nPart2: {part2()}")
