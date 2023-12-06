@@ -1,12 +1,10 @@
 from functools import reduce  # For the reduce function
-from itertools import chain  # For flattening lists
 
 """
 Advent Of Code 2023
 Code written by Milo
 Day5: If You Give A Seed A Fertilizer
 """
-
 
 # Deal with input.
 with open("day_5/input.txt", "r") as file:
@@ -17,31 +15,29 @@ maps = list(
     map(lambda x: [row.split() for row in x.split(":")[1].strip().split("\n")],data[1:]))
 
 
-def convert_value(value, map):
-    """
-    Function to convert value to new value based on map.
-    """
-    for range in map:
-        if int(range[1]) <= value <= int(range[1]) + int(range[2]):
-            return value - (int(range[1]) - int(range[0]))
-    else:
-        return value
-
-def get_location(seed):
-    return reduce(lambda x, y: convert_value(x, y), [seed] + [*maps])
-
-
 def part1():
     """
     PART1
 
-    Maps: destination range strart | source range start | range length
+    Maps: destination range start | source range start | range length
     Find the smallest location from all seeds.
 
-    Transfers: seed -> soil -> fertilizer -> water -> light -> temp -> humidity -> location
+    Conversions: seed -> soil -> fertilizer -> water -> light -> temp -> humidity -> location
 
     Answer for part1: 282277027
     """
+    def convert_value(value, map):
+        """
+        Function to convert value to new value based on map.
+        """
+        for range in map:
+            if int(range[1]) <= value <= int(range[1]) + int(range[2]):
+                return value - (int(range[1]) - int(range[0]))
+        return value
+
+    def get_location(seed):
+        return reduce(lambda x, y: convert_value(x, y), [seed] + [*maps])
+
     return min([get_location(int(seed)) for seed in seeds])
 
 def part2():
@@ -51,9 +47,7 @@ def part2():
     first value: start of range
     second value: length of range
     Get the min location value with the new seeds.
-
-    Answer for part2: 11554135
-    """
+    Answer for part2: 11554135   """
 
     new_seeds = [(int(a),int(a)+int(b)) for a,b in zip(seeds[:-1:2],seeds[1::2])]
 
