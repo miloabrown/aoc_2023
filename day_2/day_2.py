@@ -7,13 +7,7 @@ import re
 
 # Deal with input.
 with open("day_2/input.txt", "r") as file:
-    data = [
-        (list(map(lambda x: tuple(x.split(" ")),
-        ((re.split(': |; |, ',row)[1:])))))
-        for row in file.read().split("\n")[:-1]
-        ]
-
-    print(data)
+    data = [[tuple(x.split(" ")) for x in re.split(': |; |, ',row)[1:]] for row in file.read().splitlines()]
 
 def part1():
     """
@@ -23,17 +17,12 @@ def part1():
 
     Answer for part1: 2727
     """
-
-    filtered_rows = []
-
-    for id,row in enumerate(data):
-        filtered_row = (list(map(lambda x: 1 if (int(x[0])<=12 and x[1]=="red")\
-                                        or (int(x[0]) <= 13 and x[1]=="green")\
-                                        or (int(x[0]) <= 14 and x[1]=="blue") else 0\
-                                            ,row)))
-        filtered_rows.append(id+1 if all(x == 1 for x in filtered_row) else 0)
-
-    return sum(filtered_rows)
+    return sum([
+        id for id, game in enumerate(data, 1) if
+        all(int(x[0]) <= 12 for x in game if x[1] == "red") and
+        all(int(x[0]) <= 13 for x in game if x[1] == "green") and
+        all(int(x[0]) <= 14 for x in game if x[1] == "blue")
+        ])
 
 def part2():
     """
@@ -45,12 +34,12 @@ def part2():
     Answer for part2: 56580
     """
 
-    row_powers = []
-    for row in data:
-        row_powers.append(max([int(x[0]) for x in row if x[1] == "red"])\
-                        * max([int(x[0]) for x in row if x[1] == "green"])\
-                        * max([int(x[0]) for x in row if x[1] == "blue"]))
-    return sum(row_powers)
+    return sum([
+        max([int(x[0]) for x in row if x[1] == "red"]) *
+        max([int(x[0]) for x in row if x[1] == "green"]) *
+        max([int(x[0]) for x in row if x[1] == "blue"])
+        for row in data
+    ])
 
 def main():
     print(f"Part1: {part1()}\nPart2: {part2()}")
