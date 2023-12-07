@@ -6,7 +6,7 @@ Day1
 
 # Deal with input.
 with open("day_1/input.txt", "r") as file:
-    data = [line.strip() for line in file.readlines()]
+    data = file.read().splitlines()
 
 def just_digits(string):
     """
@@ -18,20 +18,17 @@ def just_digits(string):
 def part1():
     """
     PART1
-    Combine the first and last digit in each row
-    and add these numbers together.
 
     Answer for part1: 55538
     """
 
-    d = [just_digits(row) for row in data]
-    return sum([int(row[0]+row[-1]) for row in d])
+    digits = [just_digits(row) for row in data]
+    return sum([int(row[0]+row[-1]) for row in digits])
 
 
 def part2():
     """
     PART2
-    Same but also consider the "written out" digits.
 
     Answer for part2: 54875
     """
@@ -57,8 +54,8 @@ def part2():
             string = string.replace(key,item)
         return string
 
-    d = [just_digits(text_to_digit(row)) for row in data]
-    return sum([int(row[0]+row[-1]) for row in d])
+    digits = [just_digits(text_to_digit(row)) for row in data]
+    return sum([int(row[0]+row[-1]) for row in digits])
 
 
 def main():
