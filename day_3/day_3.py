@@ -97,7 +97,7 @@ def part2():
 
     Answer for part2: 75805607
     """
-    def valid_gear(x,y):
+    def valid_gear(x, y):
         """
         Helper function to check if gear
         at given coordinates has two adjacent numbers.
@@ -106,34 +106,31 @@ def part2():
         """
 
         adjacent = [
-            (x-1,y-1), (x,y-1), (x+1,y-1),
-            (x-1,y), (x+1,y),
-            (x-1,y+1), (x,y+1), (x+1,y+1)
+            (x-1, y-1), (x, y-1), (x+1, y-1),
+            (x-1, y),           (x+1, y),
+            (x-1, y+1), (x, y+1), (x+1, y+1)
         ]
 
         part_numbers = 0
-        coords_checked = []
         part_coords = []
+        coords_checked = []
 
-        for i,j in adjacent:
-            if 0 <= i\
-            and 0 <= j\
-            and i < len(data)\
-            and j < len(data[0])\
-            and data[i][j].isdigit()\
-            and (i,j) not in coords_checked:
+        for i, j in adjacent:
+            if 0 <= i < len(data) and 0 <= j < len(data[0])\
+            and data[i][j].isdigit() and (i,j) not in coords_checked:
                 part_numbers += 1
-                part_coords.append((i,j))
-                add_to_checked(i,j,coords_checked)
+                part_coords.append((i, j))
+                add_to_checked(i, j, coords_checked)
 
-        return [create_full_number(i,j) for i,j in part_coords] if part_numbers == 2 else False
+        return [create_full_number(i, j) for i, j in part_coords] if part_numbers == 2 else False
 
 
-    gears = []
-    for i in range(len(data)):
-        for j in range(len(data[i])):
-            if data[i][j] == "*" and valid_gear(i,j):
-                gears.append(math.prod(valid_gear(i,j)))
+    gears = [
+        math.prod(valid_gear(i, j))
+        for i in range(len(data))
+        for j in range(len(data[i]))
+        if data[i][j] == "*" and valid_gear(i, j)
+        ]
 
     return sum(gears)
 
