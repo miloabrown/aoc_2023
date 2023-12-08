@@ -1,4 +1,4 @@
 .env
 .vscode
-test_input.txt
+test*_input.txt
 training
