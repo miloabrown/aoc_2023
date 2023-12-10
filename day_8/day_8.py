@@ -63,9 +63,6 @@ def part2():
 
     return lcm
 
-
-
-
 def main():
     print(f"Part1: {part1()}\nPart2: {part2()}")
 
