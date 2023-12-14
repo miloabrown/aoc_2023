@@ -1,6 +1,7 @@
 """
 Advent Of Code 2023
 Code written by Milo
+Solution by HyperNeutrino
 Day 11: Cosmic Expansion
 """
 
