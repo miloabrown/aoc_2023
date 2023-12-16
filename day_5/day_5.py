@@ -43,11 +43,8 @@ def part1():
 def part2():
     """
     PART2
-    Initial seeds line consists of pairs of numbers
-    first value: start of range
-    second value: length of range
-    Get the min location value with the new seeds.
-    Answer for part2: 11554135   """
+    Answer for part2: 11554135
+    """
 
     new_seeds = [(int(a),int(a)+int(b)) for a,b in zip(seeds[:-1:2],seeds[1::2])]
 
@@ -57,9 +54,9 @@ def part2():
         new = []
         while new_seeds:
             start, end = new_seeds.pop()
-            for dest_rng_start, src_rng_start ,rng_len in ranges:
-                overlap_start = max(start,src_rng_start)
-                overlap_end = min(end,src_rng_start+rng_len)
+            for dest_rng_start, src_rng_start, rng_len in ranges:
+                overlap_start = max(start, src_rng_start)
+                overlap_end = min(end, src_rng_start+rng_len)
                 if overlap_start < overlap_end:
                     new.append((overlap_start - src_rng_start + dest_rng_start, overlap_end - src_rng_start + dest_rng_start))
                     if overlap_start > start:
