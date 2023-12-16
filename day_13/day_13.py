@@ -1,6 +1,7 @@
 """
 Advent Of Code 2023
 Code written by Milo
+Solution inspired by HyperNeutrino
 
 Day 13: Point of incidence
 """
