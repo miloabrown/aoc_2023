@@ -49,7 +49,7 @@ def part1():
 def part2():
     """
     PART2
-    Answer for part2:
+    Answer for part2: 620189727003627
     """
     ans = 0
     for line in data:
