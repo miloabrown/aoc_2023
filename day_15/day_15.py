@@ -7,7 +7,7 @@ import re
 from functools import reduce
 
 # Deal with input.
-with open("day_15/input.txt", "r") as file:
+with open("day_15/test_input.txt", "r") as file:
     data = file.read().strip().split(",")
 
 def h_algorithm(s):
@@ -34,10 +34,10 @@ def part2():
     boxes = {}
     for lens in data:
         label, focal = re.split(r"=|-", lens)
-        if focal:
-            boxes.setdefault(h_algorithm(label), {})[label] = int(focal)
-        else:
+        if not focal:
             boxes.setdefault(h_algorithm(label), {}).pop(label, None)
+            continue
+        boxes.setdefault(h_algorithm(label), {})[label] = int(focal)
 
     return sum((int(key)+1) * sum([idx * val for idx, val in enumerate(box.values(), 1)]) for key, box in boxes.items())
 
